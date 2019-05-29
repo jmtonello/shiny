@@ -21,10 +21,9 @@ shinyServer(function(input, output) {
   })
     
   output$outputPlot <- renderPlot({
-    k <- input$k
     kObj <- clusters()
     
-    # plot points, clusters
+    # plot points colored by cluster
     g <- ggplot(points(), aes(x, y)) + 
         geom_point(color=kObj$cluster, size=3) + 
         theme(axis.text.x=element_blank(),
@@ -41,7 +40,7 @@ shinyServer(function(input, output) {
       centers <- data.frame(xCenter = kObj$centers[,1], yCenter=kObj$centers[,2])
       
       g <- g + geom_point(data = centers, 
-                          aes(x=xCenter, y=yCenter), shape = 4, size=4, color=(1:k))
+                          aes(x=xCenter, y=yCenter), shape = 4, size=4, color=(1:input$k))
     }
     
     # show plot
