@@ -17,10 +17,12 @@ shinyServer(function(input, output) {
   
   # compute k clusters 
   clusters <- reactive({
-    kmeans(points(), centers = input$k)
+    kmeans(points(), centers = min(input$k, nrow(points())-1 ))
   })
     
   output$outputPlot <- renderPlot({
+    validate(need(input$k < nrow(points()), "Please select less clusters than points!"))
+
     kObj <- clusters()
     
     # plot points colored by cluster
