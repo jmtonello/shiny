@@ -30,8 +30,6 @@ shinyUI(fluidPage(
     
     # Show a plot with clustered points
     mainPanel(
-       h3("Points: ",textOutput("nText", inline = TRUE)),
-       h3("Clusters: ", textOutput("kText", inline = TRUE)),
        plotOutput("outputPlot")
     )
   )
