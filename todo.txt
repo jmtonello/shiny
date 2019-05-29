@@ -1,0 +1,35 @@
+(OK) repo hithub
+(OK) generar proyecto RStudio clonando repo de github
+(OK) crear shiny app
+(OK) deployar shiny app en shinyapps.io
+
+(*) ponerle contenido a la app
+
+	(OK) Pedir n entre 5 y 200
+	(OK) Generar n puntos (x, y) aleatorios entre 0 y 100
+	
+	(OK) Pedir k	entre 2 y 8
+	(OK) Generar k clusters con k-mean
+	
+	(OK) Dibujar los n puntos
+	(OK) Pintar cada punto con el color de su cluster
+	
+	(*) Dibujar los k centroides
+		Permitir quitar/agregar centroides sin recalcular los clusters
+	
+-----------------
+	Info útil:
+	
+	ggplot cheatSheet:
+		https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf
+
+	Si hay más de 2 dimensiones se puede usar PCA para graficarlo.  Ver:
+		http://rpubs.com/sinhrks/plot_pca
+		autoplot() {ggfortify}
+		fviz_cluster() [factoextra package]
+		
+-----------------	
+
+crear deck de slides
+
+deployar slides en github
