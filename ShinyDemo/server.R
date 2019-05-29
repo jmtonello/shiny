@@ -10,6 +10,9 @@ library(ggplot2)
 # Define server logic
 shinyServer(function(input, output) {
   
+  output$nText <- renderText(input$n)
+  output$kText <- renderText(input$k)
+  
   # generate n random points (x, y)
   points <- reactive({
     data.frame(x = runif(input$n), y = runif(input$n))
