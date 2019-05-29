@@ -18,15 +18,16 @@ shinyServer(function(input, output) {
     data.frame(x = runif(input$n), y = runif(input$n))
   })
   
+  # compute k clusters 
+  clusters <- reactive({
+    kmeans(points(), centers = input$k)
+  })
+    
   output$outputPlot <- renderPlot({
     k <- input$k
-
-    # compute k clusters
-    kObj <- kmeans(points(), centers = k)
-    centers <- data.frame(xCenter = kObj$centers[,1], yCenter=kObj$centers[,2])
+    kObj <- clusters()
     
-    # plot points, clusters and centroids
-
+    # plot points, clusters
     g <- ggplot(points(), aes(x, y)) + 
         geom_point(color=kObj$cluster, size=3) + 
         theme(axis.text.x=element_blank(),
@@ -37,9 +38,16 @@ shinyServer(function(input, output) {
           panel.grid.major=element_blank(),
           panel.grid.minor=element_blank()
           )
-    if (input$showCenters)
-      g <- g + geom_point(data = centers, aes(x=xCenter, y=yCenter), shape = 4, size=4, color=(1:k))
     
+    # add centroids?
+    if (input$showCenters) {
+      centers <- data.frame(xCenter = kObj$centers[,1], yCenter=kObj$centers[,2])
+      
+      g <- g + geom_point(data = centers, 
+                          aes(x=xCenter, y=yCenter), shape = 4, size=4, color=(1:k))
+    }
+    
+    # show plot
     g
 
   })
